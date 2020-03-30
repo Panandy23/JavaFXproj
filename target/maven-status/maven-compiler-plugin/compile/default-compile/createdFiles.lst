@@ -1,2 +1,6 @@
-sample\Main.class
-sample\Controller.class
+applicationJFX\dao\UserDAO.class
+applicationJFX\service\UserService.class
+applicationJFX\controllers\LoginController.class
+applicationJFX\model\User.class
+applicationJFX\dbconectivity\ConnectionManager.class
+applicationJFX\Main.class

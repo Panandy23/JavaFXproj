@@ -1,5 +1,6 @@
-package sample.controllers;
+package applicationJFX.controllers;
 
+import applicationJFX.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,12 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import sample.model.User;
+import applicationJFX.model.User;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+
+    private UserService userService;
 
     @FXML
     private AnchorPane loginAnchorPane;
@@ -29,18 +32,18 @@ public class LoginController implements Initializable {
     @FXML
     private Label statusLabel;
 
-    @Override
+        @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+    userService = new UserService();
     }
 
     @FXML
     public void login() {
-        if(!loginTextFild.getText().trim().isEmpty() && !loginPasswordField.getText().trim().isEmpty()){
-            boolean isLogin = loginTextFild.getText().equalsIgnoreCase(User.getExampleUser().getLogin());
-            boolean isPassword = loginPasswordField.getText().equalsIgnoreCase(User.getExampleUser().getPassword());
+       String userName = loginTextFild.getText();
+       String password = loginPasswordField.getText();
+        if(!userName.trim().isEmpty() && !password.trim().isEmpty()){
 
-            if(isLogin && isPassword){
+            if(userService.isUserValid(userName, password)){
             statusLabel.setText("login correct");
 
             }else{
